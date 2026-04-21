@@ -3,7 +3,7 @@ package com.calculator;
 import java.util.List;
 
 abstract class Expression {
-    abstract int result();
+    abstract double result();
 }
 
 class Binary extends Expression {
@@ -18,7 +18,7 @@ class Binary extends Expression {
     }
 
     @Override
-    public int result() {
+    public double result() {
         return switch(operator.getTokenType()) {
             case PLUS  -> left.result() + right.result();
             case MINUS -> left.result() - right.result();
@@ -44,7 +44,7 @@ class Unary extends Expression {
     }
 
     @Override
-    public int result() {
+    public double result() {
         if (operator.getTokenType() == TokenType.MINUS) {
             return -expr.result();
         }
@@ -67,12 +67,13 @@ class Literal extends Expression {
         this.token = token;
     }
 
-    public int result() {
-        return Integer.valueOf(token.getValue());
-    }
-
     public Token getToken() {
         return token;
+    }
+
+    @Override
+    public double result() {
+        return Double.valueOf(token.getValue());
     }
 
     @Override
@@ -89,7 +90,7 @@ class Grouping extends Expression {
     }
 
     @Override
-    public int result() {
+    public double result() {
         return expr.result();
     }
 
