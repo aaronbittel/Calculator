@@ -15,16 +15,8 @@ public class App {
         Lexer lexer = new Lexer(equation);
         try {
             List<Token> tokens = lexer.tokenize();
-            System.out.println("Tokens:");
-            System.out.println(
-                tokens.stream().map(Token::toString).collect(Collectors.joining(", ")));
-
             Parser parser = new Parser(tokens);
             Expression expr = parser.parse();
-            System.out.println("\nParsed AST:");
-            System.out.println(expr);
-
-            System.out.println("\nEquation:");
             System.out.println(equation);
             System.out.println(">>> " + expr.result());
         } catch (UnknownCharException e) {
