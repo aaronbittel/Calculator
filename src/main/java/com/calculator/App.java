@@ -20,7 +20,10 @@ public class App {
             System.out.println(equation);
             System.out.println(">>> " + expr.result());
         } catch (UnknownCharException e) {
-            System.err.println(e.getMessage());
+            System.err.println("Error: " + e.getMessage());
+            System.exit(1);
+        } catch(ArithmeticException e) {
+            System.err.println("Error: Divide by zero is not allowed");
             System.exit(1);
         }
     }
